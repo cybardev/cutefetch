@@ -55,7 +55,15 @@ elif [[ $1 = "7" ]]; then
 elif [[ $1 = "8" ]]; then
     echo "~.~"
 elif [[ $1 = "9" ]]; then
-    echo ""*.*
+    echo "*.*"
+elif [[ $1 = "10" ]]; then
+    echo "0.0"
+elif [[ $1 = "11" ]]; then
+    echo "0 0"
+elif [[ $1 = "12" ]]; then
+    echo "o o"
+elif [[ $1 = "13" ]]; then
+    echo "o.o"
 else
     echo "^.^"
 fi
@@ -99,13 +107,10 @@ if [[ -z $1 ]] || [[ $1 = "kitty" ]] || [[ $1 = "k" ]]; then
 elif [[ $1 = "bunny" ]] || [[ $1 = "b" ]]; then
     [[ -z $2 ]] && eye="0" || eye=$2
     bunnyfetch $eye
-elif [[ $1 == ?(-)+([0-9]) ]]; then
-    kittyfetch $1
 else
-    scriptinfo
+    [[ $1 == ?(-)+([0-9]) ]] && kittyfetch $1 || scriptinfo
 fi
 }
 
 # call the main function
-cutefunc "$1" "$2"
-
+cutefunc $1 $2
