@@ -6,7 +6,7 @@ A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://githu
 PS: I don't know how to fork single scripts from larger repos.
 
 ### install
-Copy the fetch script to somewhere on your `$PATH`.
+Copy the fetch script to somewhere on your `$PATH` and make it executable by running `chmod a+x ./cutefetch` in the directory it is located.
 I use `$HOME/.local/bin/`
 
 ### How it looks:
