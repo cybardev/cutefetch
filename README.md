@@ -24,6 +24,10 @@ Examples: `cutefetch kitty 6`, `cutefetch k 6`, `cutefetch` prints the default k
 
 PS: You can pass an eye style without an animal argument to print a kitty with that eye style.
 
+### Screenshots
+
+![desktop](https://imgur.com/tX8Fqt4.png)
+
 ### Links:
 - [original script](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch)
 - [author's repo](https://github.com/elenapan/dotfiles/)
