@@ -6,18 +6,15 @@ A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://githu
 PS: I don't know how to fork single scripts from larger repos.
 
 ### Install
-Copy the fetch script to somewhere on your `$PATH` and make it executable by running `chmod a+x ./cutefetch` in the directory it is located.
-
-I use `$HOME/.local/bin/`
+- Place the fetch script somewhere on your `$PATH` (I use `$HOME/.local/bin/`)
+- Make it executable by running `chmod a+x ./cutefetch` in the directory it is located
 
 ### Usage
 After installation, run `cutefetch` in the terminal.
 
 Command line arguments can be passed to specify the animal and eye style.
-
-Valid animal arguments: kitty, k, bunny, b
-
-Valid eye styles: integers from 0 to 13
+- Valid animal arguments: kitty, k, bunny, b
+- Valid eye styles: integers from 0 to 13
 
 Examples: `cutefetch kitty 6`, `cutefetch k 6`, `cutefetch` prints the default kitty.
 `cutefetch bunny 0`, `cutefetch b 0`, `cutefetch b`, etc. prints a bunny.
