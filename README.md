@@ -20,6 +20,7 @@ Examples: `cutefetch kitty 6`, `cutefetch k 6`, `cutefetch` prints the default k
 `cutefetch bunny 0`, `cutefetch b 0`, `cutefetch b`, etc. prints a bunny.
 
 `cutefetch $(printf 'kitty\nbunny' | shuf -n 1) $(shuf -i 1-13 -n 1)` prints a random animal with random face. Add this to your `.zshrc`, `.bashrc`, `config.fish`, etc. to spice up your shell. :3
+
 *this wonderful idea of randomizing the animal and face was contributed by [Westofer](https://github.com/westofer)*
 
 PS: You can pass an eye style without an animal argument to print a kitty with that eye style.
