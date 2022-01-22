@@ -1,115 +1,122 @@
 #!/usr/bin/env bash
-# Tiny colored fetch script
-# Requires Typicons Font to display the icons
+# ----------------------------------------------------------------
+# Cutefetch v1.0
+#
+# Tiny colored fetch script with cute little animals
+#
+# Authored by: elenapan (https://github.com/elenapan)
+# Modified by: strafe (https://github.com/strafe)
+# Modified by: cybardev (https://github.com/cybardev)
+# ----------------------------------------------------------------
 
-f=3 b=4
-for j in f b; do
-  for i in {0..7}; do
-    printf -v $j$i %b "\e[${!j}${i}m"
-  done
-done
-d=$'\e[1m'
-t=$'\e[0m'
-v=$'\e[7m'
+# store color codes in variables
+function setup_colors() {
+    for i in {0..7}; do
+        printf -v "c${i}" '%b' "\e[3${i}m"
+    done
 
-# Items
-sep=
-s=$d$f0$sep$t
+    readonly d=$'\e[1m'
+    readonly t=$'\e[0m'
+    readonly v=$'\e[7m'
+}
 
-w=
-netname="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
-[[ -z $netname ]] && netname="no wifi"
+# set necessary variables
+function setup_variables() {
+    # symbols
+    w=
+    k=
+    s=
+    r=
+    h=
 
-h=
-wmname="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
+    # info
+    wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
+    kern="$(uname -r | cut -d '-' -f1)"
+    shell=$(basename $SHELL)
+    res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
+    net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
+    [[ -z $net ]] && net="no wifi"
+}
 
-k=
-kernel="$(uname -r | cut -d '-' -f1)"
-
-r=
-resolution="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
-
-sh=
-shell=$(basename $SHELL)
-
-# set the eyes, ^.^ by default
+# set the eyes, ^.^ by default for cat, . . for bunny
 eyes() {
-if [[ -z $1 ]]; then
-    echo "^.^"
-elif [[ $1 = "0" ]]; then
-    echo ". ."
-elif [[ $1 = "1" ]]; then
-    echo "· ·"
-elif [[ $1 = "2" ]]; then
-    echo "^ ^"
-elif [[ $1 = "3" ]]; then
-    echo "- -"
-elif [[ $1 = "4" ]]; then
-    echo "~ ~"
-elif [[ $1 = "5" ]]; then
-    echo "* *"
-elif [[ $1 = "6" ]]; then
-    echo "^.^"
-elif [[ $1 = "7" ]]; then
-    echo "-.-"
-elif [[ $1 = "8" ]]; then
-    echo "~.~"
-elif [[ $1 = "9" ]]; then
-    echo "*.*"
-elif [[ $1 = "10" ]]; then
-    echo "0.0"
-elif [[ $1 = "11" ]]; then
-    echo "0 0"
-elif [[ $1 = "12" ]]; then
-    echo "o o"
-elif [[ $1 = "13" ]]; then
-    echo "o.o"
-else
-    echo "^.^"
-fi
+    if [[ -z $1 ]]; then
+        echo "^.^"
+    elif [[ $1 = "0" ]]; then
+        echo ". ."
+    elif [[ $1 = "1" ]]; then
+        echo "· ·"
+    elif [[ $1 = "2" ]]; then
+        echo "^ ^"
+    elif [[ $1 = "3" ]]; then
+        echo "- -"
+    elif [[ $1 = "4" ]]; then
+        echo "~ ~"
+    elif [[ $1 = "5" ]]; then
+        echo "* *"
+    elif [[ $1 = "6" ]]; then
+        echo "^.^"
+    elif [[ $1 = "7" ]]; then
+        echo "-.-"
+    elif [[ $1 = "8" ]]; then
+        echo "~.~"
+    elif [[ $1 = "9" ]]; then
+        echo "*.*"
+    elif [[ $1 = "10" ]]; then
+        echo "0.0"
+    elif [[ $1 = "11" ]]; then
+        echo "0 0"
+    elif [[ $1 = "12" ]]; then
+        echo "o o"
+    elif [[ $1 = "13" ]]; then
+        echo "o.o"
+    else
+        echo "^.^"
+    fi
 }
 
 # sysinfo with cute kitty
 kittyfetch() {
-tput clear
-printf "            $d$f1$h  $t$wmname
-   /\_/\    $f3$k  $t$kernel
-  ( $d$(eyes $1)$t )   $f2$sh  $t$shell
-   $f1>$t $f3^$t $f1<$t    $f5$r  $t$resolution
-            $f4$w  $t$netname
-"
+    printf '\n             %s%s%b  %s%s\n   /\_/\     %s%b  %s%s\n  ( %s%s%s )    %s%b  %s%s\n   %s>%s %s^%s %s<%s     %s%b  %s%s\n             %s%b  %s%s\n\n' \
+        "$d" "$c1" "$w" "$t" "$wm" \
+        "$c3" "$k" "$t" "$kern" \
+        "$d" "$(eyes $1)" "$t" "$c2" "$s" "$t" "$shell" \
+        "$c1" "$t" "$c3" "$t" "$c1" "$t" "$c5" "$r" "$t" "$res" \
+        "$c4" "$n" "$t" "$net"
 }
 
 # sysinfo with cute bunny
 bunnyfetch() {
-tput clear
-printf "             $d$f1$h  $t$wmname
-   (\ /)     $f3$k  $t$kernel
-   ( $d$(eyes $1)$t)    $f2$sh  $t$shell
-   c($f1\"$t)($f1\"$t)   $f5$r  $t$resolution
-             $f4$w  $t$netname
-"
+    printf '\n             %s%s%b  %s%s\n   (\ /)     %s%b  %s%s\n   ( %s%s%s)    %s%b  %s%s\n   c(%s"%s)(%s"%s)   %s%b  %s%s\n             %s%b  %s%s\n\n' \
+        "$d" "$c1" "$w" "$t" "$wm" \
+        "$c3" "$k" "$t" "$kern" \
+        "$d" "$(eyes $1)" "$t" "$c2" "$s" "$t" "$shell" \
+        "$c1" "$t" "$c1" "$t" "$c5" "$r" "$t" "$res" \
+        "$c4" "$n" "$t" "$net"
 }
 
 # script information
 scriptinfo() {
-printf "cutefetch - simple colored script to display system info
-Usage: cutefetch kitty/bunny
-If no argument is given, kitty is assumed.
-If unknown argument is given, this message is shown.
-"
+    printf "cutefetch - simple colored script to display system info\n"
+    printf "Usage: cutefetch kitty/bunny\nIf no argument is given, kitty is assumed.\n"
+    printf "       If unknown argument is given, this message is shown.\n"
 }
 
 # print the fetch info, kitty by default, bunny otherwise
 cutefunc() {
-if [[ -z $1 ]] || [[ $1 = "kitty" ]] || [[ $1 = "k" ]]; then
-    kittyfetch $2
-elif [[ $1 = "bunny" ]] || [[ $1 = "b" ]]; then
-    [[ -z $2 ]] && eye="0" || eye=$2
-    bunnyfetch $eye
-else
-    [[ $1 == ?(-)+([0-9]) ]] && kittyfetch $1 || scriptinfo
-fi
+    tput clear
+    setup_colors
+    setup_variables
+    if [[ -z $1 ]] || [[ $1 = "kitty" ]] || [[ $1 = "k" ]]; then
+        kittyfetch $2
+    elif [[ $1 = "bunny" ]] || [[ $1 = "b" ]]; then
+        [[ -z $2 ]] && eye="0" || eye=$2
+        bunnyfetch $eye
+    elif [[ $1 = "?" ]]; then
+        scriptinfo
+    else
+        kittyfetch $1
+    fi
 }
 
 # call the main function
