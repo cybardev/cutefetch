@@ -27,7 +27,7 @@ function setup_variables() {
     k=
     s=
     r=
-    h=
+    n=
 
     # info
     wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
