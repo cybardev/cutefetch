@@ -41,7 +41,6 @@ function setup_variables() {
 # set the eyes, ^.^ by default for cat, . . for bunny
 eyes() {
     case "$1" in
-        "")   echo "^.^" ;;
         "0")  echo ". ." ;;
         "1")  echo "· ·" ;;
         "2")  echo "^ ^" ;;
