@@ -1,7 +1,8 @@
 # cutefetch
 Cute little sysinfo fetch script for use in screenshots.
 
-A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch) script.
+A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch) script.  
+Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/)
 
 PS: I don't know how to fork single scripts from larger repos.
 
