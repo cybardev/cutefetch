@@ -32,4 +32,5 @@ PS: You can pass an eye style without an animal argument to print a kitty with t
 
 ### Links:
 - [original script](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch)
-- [author's repo](https://github.com/elenapan/dotfiles/)
+- [elenapan/dotfiles](https://github.com/elenapan/dotfiles/)
+- [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/)
