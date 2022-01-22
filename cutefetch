@@ -38,7 +38,7 @@ function setup_variables() {
     [[ -z $net ]] && net="no wifi"
 }
 
-# set the eyes, ^.^ by default for cat, . . for bunny
+# set the eyes, ^.^ by default
 eyes() {
     case "$1" in
         "0")  echo ". ." ;;
