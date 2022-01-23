@@ -9,14 +9,19 @@
 # Modified by: cybardev (https://github.com/cybardev)
 # ----------------------------------------------------------------
 
+# script information
+scriptinfo() {
+    printf "cutefetch - simple colored script to display system info\n"
+    printf "Usage: cutefetch kitty/bunny\nIf no argument is given, kitty is assumed.\n"
+    printf "       If unknown argument is given, this message is shown.\n"
+}
+
 # detect what OS the script is being run on
 function check_os() {
-    uname_detected = "$(uname -s)"
+    uname_detected="$(uname -s)"
     case "$uname_detected" in
         Linux*)  echo linux  ;;
         Darwin*) echo macos  ;;
-        CYGWIN*) echo cygwin ;;
-        MINGW*)  echo mingw  ;;
         *)       echo "$uname_detected" ;;
     esac
 }
@@ -73,14 +78,14 @@ function setup_variables() {
     readonly n="\xEF\x87\xAB"
 
     # info
-    if [[ "$1" = "linux" ]]
-        wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
-        kern="$(uname -r | cut -d '-' -f1)"
-        shell=$(basename $SHELL)
-        res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
-        net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
-        [[ -z $net ]] && net="no wifi"
-    elif [[ "$1" = "macos" ]]
+    if [[ "$1" = "linux" ]]; then
+        readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
+        readonly kern="$(uname -r | cut -d '-' -f1)"
+        readonly shell=$(basename $SHELL)
+        readonly res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
+        readonly net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
+        [[ -z $net ]] && readonly net="no wifi"
+    elif [[ "$1" = "macos" ]]; then
         readonly wm="$(get_wm_mac)"
         readonly kern="$(uname -r | cut -d '-' -f1)"
         readonly shell="$(basename "$SHELL")"
@@ -131,13 +136,6 @@ bunnyfetch() {
         "$d" "$(eyes $1)" "$t" "$c2" "$s" "$t" "$shell" \
         "$c1" "$t" "$c1" "$t" "$c5" "$r" "$t" "$res" \
         "$c4" "$n" "$t" "$net"
-}
-
-# script information
-scriptinfo() {
-    printf "cutefetch - simple colored script to display system info\n"
-    printf "Usage: cutefetch kitty/bunny\nIf no argument is given, kitty is assumed.\n"
-    printf "       If unknown argument is given, this message is shown.\n"
 }
 
 # print the fetch info, kitty by default, bunny otherwise
