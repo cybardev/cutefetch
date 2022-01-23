@@ -1,7 +1,7 @@
 # cutefetch
 Cute little sysinfo fetch script for use in screenshots.
 
-> Please visit [cybardev/cutefetch-mac](https://github.com/cybardev/cutefetch-mac/) for a Mac OS compatible version of this script
+> This script works on both Linux and Mac OS systems. Enjoy~ :3
 
 A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch) script.  
 Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/)
