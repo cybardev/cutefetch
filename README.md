@@ -4,9 +4,7 @@ Cute little sysinfo fetch script for use in screenshots.
 > This script works on both Linux and Mac OS systems. Enjoy~ :3
 
 A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch) script.  
-Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/)
-
-PS: I don't know how to fork single scripts from larger repos.
+Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/) and adds Mac OS compatibility
 
 ### Install
 - Place the fetch script somewhere on your `$PATH` (I use `$HOME/.local/bin/`)
