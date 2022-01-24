@@ -114,7 +114,7 @@ eyes() {
         "11") echo "0 0" ;;
         "12") echo "o o" ;;
         "13") echo "o.o" ;;
-        "*")  echo "^.^" ;;
+          * ) echo "^.^" ;;
     esac
 }
 
