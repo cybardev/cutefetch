@@ -148,7 +148,7 @@ cutefunc() {
     elif [[ $1 = "bunny" ]] || [[ $1 = "b" ]]; then
         [[ -z $2 ]] && eye="0" || eye=$2
         bunnyfetch $eye
-    elif [[ $1 = "?" ]]; then
+    elif [[ $1 = "h" ]]; then
         scriptinfo
     else
         kittyfetch $1
