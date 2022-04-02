@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------
 readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
-# Tiny colored fetch script with cute little animals
+# Tiny coloured fetch script with cute little animals
 #
 # Authored by: elenapan (https://github.com/elenapan)
 # Modified by: strafe   (https://github.com/strafe)
@@ -11,7 +11,7 @@ readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 
 # script information
 scriptinfo() {
-  printf "cutefetch - simple colored script to display system info\n\n"
+  printf "Cutefetch - Tiny coloured fetch script to display sysinfo\n\n"
   printf "USAGE: cutefetch [MODE] [EYE_SELECTOR]\n\n"
   printf "    [MODE]:\n"
   printf "        -h, --help: print this help message\n"
@@ -77,14 +77,14 @@ get_res_mac() {
 
 # set necessary variables
 init() {
-  # store color codes in variables
+  # store colour codes in variables
   for i in {0..7}; do
-    printf -v "c${i}" '%b' "\e[3${i}m"
+    printf -v "c${i}" '%b' "\e[3${i}m" # make following text have this colour
   done
 
-  readonly d=$'\e[1m'
-  readonly t=$'\e[0m'
-  readonly v=$'\e[7m'
+  readonly d=$'\e[1m' # make following text bold
+  readonly t=$'\e[0m' # end previously applied effects (colours, bold, etc.)
+  readonly v=$'\e[7m' # swap text and background colours
 
   # icons for the sysinfo
   readonly w="\xEF\x82\x8A" # window manager
