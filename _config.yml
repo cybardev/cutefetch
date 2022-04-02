@@ -1,0 +1,6 @@
+theme: jekyll-theme-minimal
+title: cutefetch
+description: Cute little sysinfo fetch script for use in screenshots
+logo: https://user-images.githubusercontent.com/50134239/106631109-a1e44400-65a6-11eb-9a66-b094904f46bd.png
+show_downloads: true
+download_link: https://github.com/cybardev/cutefetch/releases/download/v2.0/cutefetch
