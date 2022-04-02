@@ -10,7 +10,7 @@ readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 # ----------------------------------------------------------------
 
 # script information
-scriptinfo() {
+help_info() {
   printf "Cutefetch - Tiny coloured fetch script to display sysinfo\n\n"
   printf "USAGE: cutefetch [MODE] [EYE_SELECTOR]\n\n"
   printf "    [MODE]:\n"
@@ -184,7 +184,7 @@ main() {
   if [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]; then
     echo $PROGRAM_INFO
   elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
-    scriptinfo
+    help_info
   else
     tput clear
     init "$(check_os)"
@@ -200,7 +200,7 @@ main() {
       -s | --simple )
         simplefetch ;;
       * )
-        scriptinfo
+        help_info
         exit 1 ;;
     esac
   fi
