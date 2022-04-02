@@ -20,9 +20,9 @@ scriptinfo() {
 check_os() {
   uname_detected="$(uname -s)"
   case "$uname_detected" in
-    Linux*)  echo linux ;;
-    Darwin*) echo macos ;;
-    *)       echo "$uname_detected" ;;
+    Linux* )  echo linux ;;
+    Darwin* ) echo macos ;;
+    * )       echo "$uname_detected" ;;
   esac
 }
 
@@ -38,13 +38,13 @@ get_wm_mac() {
   -e "[R]ectangle")"
 
   case $ps_line in
-    *chunkwm*)   echo chunkwm ;;
-    *kwm*)       echo Kwm ;;
-    *yabai*)     echo yabai ;;
-    *Amethyst*)  echo Amethyst ;;
-    *Spectacle*) echo Spectacle ;;
-    *Rectangle*) echo Rectangle ;;
-    *)           echo Quartz ;;
+    *chunkwm* )   echo chunkwm ;;
+    *kwm* )       echo Kwm ;;
+    *yabai* )     echo yabai ;;
+    *Amethyst* )  echo Amethyst ;;
+    *Spectacle* ) echo Spectacle ;;
+    *Rectangle* ) echo Rectangle ;;
+    * )           echo Quartz ;;
   esac
 }
 
