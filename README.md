@@ -1,11 +1,13 @@
 # cutefetch
 
-Cute little sysinfo fetch script for use in screenshots.
+## Cute little sysinfo fetch script for use in screenshots.
 
 > This script works on both Linux and Mac OS systems. Enjoy~ :3
 
 A "fork" of [elenapan](https://github.com/elenapan)'s [bunnyfetch](https://github.com/elenapan/dotfiles/blob/master/bin/bunnyfetch) script.
 Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/) and adds Mac OS compatibility
+
+<img width="245" alt="image" src="https://user-images.githubusercontent.com/50134239/161402429-2561a87a-3a89-42d4-ad7c-cefe4ef62fa2.png">
 
 ### Install
 
