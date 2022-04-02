@@ -34,16 +34,6 @@ help_info() {
   printf "          or %3s (puppy)\n" "$(eyes 11)"
 }
 
-# detect what OS the script is being run on
-check_os() {
-  uname_detected="$(uname -s)"
-  case "$uname_detected" in
-    Linux* )  echo linux ;;
-    Darwin* ) echo macos ;;
-    * )       echo "$uname_detected" ;;
-  esac
-}
-
 # name of window manager (Mac OS)
 get_wm_mac() {
   # From neofetch (https://github.com/dylanaraps/neofetch).
@@ -95,7 +85,7 @@ init() {
 
   # system information
   case "$1" in
-    "linux" )
+    Linux* )
       readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
       readonly kern="$(uname -r | cut -d '-' -f1)"
       readonly shell=$(basename $SHELL)
@@ -103,7 +93,7 @@ init() {
       readonly net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
       [[ -z $net ]] && readonly net="no wifi"
       ;;
-    "macos" )
+    Darwin* )
       readonly wm="$(get_wm_mac)"
       readonly kern="$(uname -r | cut -d '-' -f1)"
       readonly shell="$(basename "$SHELL")"
@@ -186,8 +176,8 @@ main() {
   elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
     help_info
   else
-    tput clear
-    init "$(check_os)"
+    tput clear # clear terminal screen
+    init "$(uname -s)" # initialize based on OS
     case "$1" in
       -k | --kitty | "" )
         kittyfetch $2 ;;
