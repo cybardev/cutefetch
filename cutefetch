@@ -149,8 +149,8 @@ puppyfetch() {
 
 # sysinfo with cute icons
 simplefetch() {
-  printf '\n  %s%s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n\n' \
-    "$d" "$c1" "$w" "$t" "$wm" \
+  printf '\n  %s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n  %s%b  %s%s\n\n' \
+    "$c1" "$w" "$t" "$wm" \
     "$c3" "$k" "$t" "$kern" \
     "$c2" "$s" "$t" "$shell" \
     "$c5" "$r" "$t" "$res" \
