@@ -29,7 +29,7 @@ check_os() {
 # store color codes in variables
 setup_colors() {
   for i in {0..7}; do
-      printf -v "c${i}" '%b' "\e[3${i}m"
+    printf -v "c${i}" '%b' "\e[3${i}m"
   done
 
   readonly d=$'\e[1m'
