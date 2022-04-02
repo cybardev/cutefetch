@@ -1,6 +1,6 @@
 #!/bin/sh
 # ----------------------------------------------------------------
-# Cutefetch v2.0
+readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
 # Tiny colored fetch script with cute little animals
 #
@@ -11,9 +11,27 @@
 
 # script information
 scriptinfo() {
-  printf "cutefetch - simple colored script to display system info\n"
-  printf "Usage: cutefetch kitty/bunny\nIf no argument is given, kitty is assumed.\n"
-  printf "       If unknown argument is given, this message is shown.\n"
+  printf "cutefetch - simple colored script to display system info\n\n"
+  printf "USAGE: cutefetch [MODE] [EYE_SELECTOR]\n\n"
+  printf "    [MODE]:\n"
+  printf "        -h, --help: print this help message\n"
+  printf "        -k, --kitty: show the kitty ascii art with sysinfo\n"
+  printf "        -b, --bunny: show the bunny ascii art with sysinfo\n"
+  printf "        -p, --puppy: show the puppy ascii art with sysinfo\n"
+  printf "        -s, --simple: show sysinfo with no ascii art\n"
+  printf "        -v, --version: print the version number\n"
+  printf "        no option: same as -k, --kitty\n"
+  printf "        unkown option: print this help message\n"
+  printf "                       and return status code 1\n\n"
+  printf "    [EYE_SELECTOR] (optional):\n"
+  printf "        (numbers from 0 to 13)\n"
+  for i in {0..13}; do
+    printf "        %2d:  %3s\n" "$i" "$(eyes $i)"
+  done
+  printf "        no/other number:\n"
+  printf "             %3s (kitty)\n" "$(eyes  6)"
+  printf "          or %3s (bunny)\n" "$(eyes  0)"
+  printf "          or %3s (puppy)\n" "$(eyes 11)"
 }
 
 # detect what OS the script is being run on
@@ -162,25 +180,30 @@ simplefetch() {
 
 # print the fetch info, kitty by default, bunny otherwise
 main() {
-  tput clear
-  init "$(check_os)"
-  case "$1" in
-    -k | --kitty | "" )
-      kittyfetch $2 ;;
-    -b | --bunny )
-      [[ -z $2 ]] && eye="0" || eye="$2"
-      bunnyfetch $eye ;;
-    -p | --puppy )
-      [[ -z $2 ]] && eye="11" || eye="$2"
-      puppyfetch $eye ;;
-    -s | --simple )
-      simplefetch ;;
-    -h | --help )
-      scriptinfo ;;
-    * )
-      scriptinfo
-      exit 1 ;;
-  esac
+  # -v, --version and -h, --help do not clear the screen
+  if [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]; then
+    echo $PROGRAM_INFO
+  elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
+    scriptinfo
+  else
+    tput clear
+    init "$(check_os)"
+    case "$1" in
+      -k | --kitty | "" )
+        kittyfetch $2 ;;
+      -b | --bunny )
+        [[ -z $2 ]] && eye="0" || eye="$2"
+        bunnyfetch $eye ;;
+      -p | --puppy )
+        [[ -z $2 ]] && eye="11" || eye="$2"
+        puppyfetch $eye ;;
+      -s | --simple )
+        simplefetch ;;
+      * )
+        scriptinfo
+        exit 1 ;;
+    esac
+  fi
 }
 
 # call the main function
