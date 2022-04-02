@@ -173,6 +173,8 @@ main() {
       puppyfetch $eye ;;
     -s | --simple )
       simplefetch ;;
+    -h | --help )
+      scriptinfo ;;
     * )
       scriptinfo
       exit 1 ;;
