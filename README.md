@@ -35,9 +35,9 @@ USAGE: cutefetch [MODE] [EYE_SELECTOR]
 
     [MODE]:
         -h, --help: print this help message
-        -k, --kitty: show the kitty ascii art with sysinfo
-        -b, --bunny: show the bunny ascii art with sysinfo
-        -p, --puppy: show the puppy ascii art with sysinfo
+        -k, --kitty: show kitty ascii art with sysinfo
+        -b, --bunny: show bunny ascii art with sysinfo
+        -p, --puppy: show puppy ascii art with sysinfo
         -s, --simple: show sysinfo with no ascii art
         -v, --version: print the version number
         no option: same as -k, --kitty
