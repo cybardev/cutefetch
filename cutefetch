@@ -20,8 +20,8 @@ scriptinfo() {
 check_os() {
   uname_detected="$(uname -s)"
   case "$uname_detected" in
-    Linux*)  echo linux  ;;
-    Darwin*) echo macos  ;;
+    Linux*)  echo linux ;;
+    Darwin*) echo macos ;;
     *)       echo "$uname_detected" ;;
   esac
 }
