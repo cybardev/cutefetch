@@ -9,10 +9,13 @@ readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 # Modified by: cybardev (https://github.com/cybardev)
 # ----------------------------------------------------------------
 
-# script information
+# basename of script being executed
+readonly PROGRAM_ALIAS="$(basename $0)"
+
+# help information
 help_info() {
   printf "Cutefetch - Tiny coloured fetch script to display sysinfo\n\n"
-  printf "USAGE: cutefetch [MODE] [EYE_SELECTOR]\n\n"
+  printf "USAGE: ${PROGRAM_ALIAS} [MODE] [EYE_SELECTOR]\n\n"
   printf "    [MODE]:\n"
   printf "        -h, --help: print this help message\n"
   printf "        -k, --kitty: show kitty ascii art with sysinfo\n"
