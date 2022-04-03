@@ -87,7 +87,7 @@ init() {
   readonly n="\xEF\x87\xAB" # network
 
   # system information
-  case "$1" in
+  case "$(uname -s)" in
     Linux* )
       readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
       readonly kern="$(uname -r | cut -d '-' -f1)"
@@ -109,6 +109,8 @@ init() {
       exit 1
       ;;
   esac
+
+  tput clear # clear terminal screen
 }
 
 # set the eyes, ^.^ by default
@@ -179,8 +181,7 @@ main() {
   elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
     help_info
   else
-    tput clear # clear terminal screen
-    init "$(uname -s)" # initialize based on OS
+    init
     case "$1" in
       -k | --kitty | "" )
         kittyfetch $2 ;;
