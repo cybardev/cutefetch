@@ -1,6 +1,6 @@
 #!/bin/sh
 # ----------------------------------------------------------------
-readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
+readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
 # Tiny coloured fetch script with cute little animals
 #
@@ -9,14 +9,11 @@ readonly PROGRAM_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 # Modified by: cybardev (https://github.com/cybardev)
 # ----------------------------------------------------------------
 
-# basename of script being executed
-readonly PROGRAM_ALIAS="$(basename $0)"
-
 # help information
 help_info() {
     echo "Cutefetch - Tiny coloured fetch script to display sysinfo"
     echo ""
-    echo "USAGE: ${PROGRAM_ALIAS} [MODE] [EYE_SELECTOR]"
+    echo "USAGE: $(basename $0) [MODE] [EYE_SELECTOR]"
     echo ""
     echo "    [MODE]:"
     echo "        -h, --help: print this help message"
@@ -184,7 +181,7 @@ simplefetch() {
 main() {
     # -v, --version and -h, --help do not clear the screen
     if [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]; then
-        echo $PROGRAM_INFO
+        echo $VERSION_INFO
     elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
         help_info
     else
