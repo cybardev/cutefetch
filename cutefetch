@@ -35,6 +35,7 @@ help_info() {
     printf "             %3s (kitty)\n" "$(eyes 6)"
     printf "          or %3s (bunny)\n" "$(eyes 0)"
     printf "          or %3s (puppy)\n" "$(eyes 11)"
+    echo ""
 }
 
 # name of window manager (Mac OS)
@@ -135,46 +136,38 @@ eyes() {
 
 # sysinfo with cute kitty
 kittyfetch() {
-    echo ""
     echo "             $c1$w$t  $wm"
     echo "   /\_/\     $c3$k$t  $kern"
     echo "  ( $(eyes $1) )    $c2$s$t  $shell"
     echo "   $c1> $c3^ $c1<     $c5$r$t  $res"
     echo "             $c4$n$t  $net"
-    echo ""
 }
 
 # sysinfo with cute bunny
 bunnyfetch() {
-    echo ""
     echo "             $c1$w$t  $wm"
     echo "   (\ /)     $c3$k$t  $kern"
     echo "   ( $(eyes $1))    $c2$s$t  $shell"
     echo "   c($c1\"$t)($c1\"$t)   $c5$r$t  $res"
     echo "             $c4$n$t  $net"
-    echo ""
 }
 
 # sysinfo with cute puppy
 puppyfetch() {
-    echo ""
     echo "             $c1$w$t  $wm"
     echo "   /^ ^\     $c3$k$t  $kern"
     echo "  / $(eyes $1) \    $c2$s$t  $shell"
     echo "  V\ Y /V    $c5$r$t  $res"
     echo "             $c4$n$t  $net"
-    echo ""
 }
 
 # sysinfo with cute icons
 simplefetch() {
-    echo ""
     echo "  $c1$w$t  $wm"
     echo "  $c3$k$t  $kern"
     echo "  $c2$s$t  $shell"
     echo "  $c5$r$t  $res"
     echo "  $c4$n$t  $net"
-    echo ""
 }
 
 # print the fetch info, kitty by default, bunny otherwise
@@ -186,6 +179,7 @@ main() {
         help_info
     else
         init
+        echo ""
         case "$1" in
         -k | --kitty | "")
             kittyfetch $2
@@ -206,6 +200,7 @@ main() {
             exit 1
             ;;
         esac
+        echo ""
     fi
 }
 
