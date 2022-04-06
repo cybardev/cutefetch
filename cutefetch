@@ -19,7 +19,8 @@ help_info() {
     echo "        -h, --help: print this help message"
     echo "        -k, --kitty: show kitty ascii art with sysinfo"
     echo "        -b, --bunny: show bunny ascii art with sysinfo"
-    echo "        -p, --puppy: show puppy ascii art with sysinfo"
+    echo "        -d, --doggy: show doggy ascii art with sysinfo"
+    echo "        -p, --pingu: show penguin ascii art with sysinfo"
     echo "        -s, --simple: show sysinfo with no ascii art"
     echo "        -v, --version: print the version number"
     echo "        no option: same as -k, --kitty"
@@ -27,14 +28,17 @@ help_info() {
     echo "                       and return status code 1"
     echo ""
     echo "    [EYE_SELECTOR] (optional):"
-    echo "        (numbers from 0 to 13)"
+    echo "        Numbers from 0 to 13:"
+    echo "            Selects eyes for kitty, bunny, and doggy"
+    echo ""
     for i in {0..13}; do
         printf "        %2d:  %3s\n" "$i" "$(eyes $i)"
     done
+    echo ""
     printf "        no/other number:\n"
     printf "             %3s (kitty)\n" "$(eyes 6)"
     printf "          or %3s (bunny)\n" "$(eyes 0)"
-    printf "          or %3s (puppy)\n" "$(eyes 11)"
+    printf "          or %3s (doggy)\n" "$(eyes 1)"
     echo ""
 }
 
@@ -154,11 +158,20 @@ bunnyfetch() {
 
 # sysinfo with cute puppy
 puppyfetch() {
-    echo "             $c1$w$t  $wm"
-    echo "   /^ ^\     $c3$k$t  $kern"
-    echo "  / $(eyes $1) \    $c2$s$t  $shell"
-    echo "  V\ Y /V    $c5$r$t  $res"
-    echo "             $c4$n$t  $net"
+    echo "            $c1$w$t  $wm"
+    echo "$c3   /^ ^\    $k$t  $kern"
+    echo "$c3  /$t$c7 $(eyes $1) $c3\   $c2$s$t  $shell"
+    echo "$c3  V\\$t$c0 Y $c3/V   $c5$r$t  $res"
+    echo "    $c1 U$t      $c4$n$t  $net"
+}
+
+# sysinfo with cute penguin
+pingufetch() {
+    echo "$c3    W     $c1$w$t  $wm"
+    echo "$c0   ($t$c7'$c3>    $k$t  $kern"
+    echo "$c0  /$t$c7/‾\\$c0\\   $c2$s$t  $shell"
+    echo "$c0  ($t$c7\_/$c0)   $c5$r$t  $res"
+    echo "$c3   ~ ~    $c4$n$t  $net"
 }
 
 # sysinfo with cute icons
@@ -170,7 +183,7 @@ simplefetch() {
     echo "  $c4$n$t  $net"
 }
 
-# print the fetch info, kitty by default, bunny otherwise
+# print the fetch info, kitty by default
 main() {
     # -v, --version and -h, --help do not clear the screen
     if [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]; then
@@ -188,9 +201,12 @@ main() {
             [[ -z $2 ]] && eye="0" || eye="$2"
             bunnyfetch $eye
             ;;
-        -p | --puppy)
-            [[ -z $2 ]] && eye="11" || eye="$2"
+        -d | --doggy)
+            [[ -z $2 ]] && eye="1" || eye="$2"
             puppyfetch $eye
+            ;;
+        -p | --pingu)
+            pingufetch
             ;;
         -s | --simple)
             simplefetch
