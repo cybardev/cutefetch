@@ -1,5 +1,5 @@
 #!/bin/sh
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------- #
 readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
 # Tiny coloured fetch script with cute little animals
@@ -7,7 +7,9 @@ readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 # Authored by: elenapan (https://github.com/elenapan)
 # Modified by: strafe   (https://github.com/strafe)
 # Modified by: cybardev (https://github.com/cybardev)
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------- #
+
+# ---------------------------- Utilities ---------------------------- #
 
 # help information
 help_info() {
@@ -42,101 +44,27 @@ help_info() {
     echo ""
 }
 
-# name of window manager (Mac OS)
-get_wm_mac() {
-    # From neofetch (https://github.com/dylanaraps/neofetch).
-    local -r ps_line="$(ps -e | grep -o \
-        -e "[S]pectacle" \
-        -e "[A]methyst" \
-        -e "[k]wm" \
-        -e "[c]hun[k]wm" \
-        -e "[y]abai" \
-        -e "[R]ectangle")"
-
-    case $ps_line in
-    *chunkwm*) echo chunkwm ;;
-    *kwm*) echo Kwm ;;
-    *yabai*) echo yabai ;;
-    *Amethyst*) echo Amethyst ;;
-    *Spectacle*) echo Spectacle ;;
-    *Rectangle*) echo Rectangle ;;
-    *) echo Quartz ;;
-    esac
-}
-
-# get the screen resolution (Mac OS)
-get_res_mac() {
-    # print resolution of multiple displays, separated by commas
-    echo "$(system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g')"
-
-    # print resolution of retina display
-    # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
-}
-
-# set necessary variables
-init() {
-    # store colour codes in variables
-    for i in {0..7}; do
-        printf -v "c${i}" '%b' "\e[3${i}m" # make following text have this colour
-    done
-
-    readonly d=$'\e[1m' # make following text bold
-    readonly t=$'\e[0m' # end previously applied effects (colours, bold, etc.)
-    readonly v=$'\e[7m' # swap text and background colours
-
-    # icons for the sysinfo
-    readonly w="\xEF\x82\x8A" # window manager
-    readonly k="\xEF\x82\xAD" # kernel
-    readonly s="\xEF\x84\xA0" # shell
-    readonly r="\xEF\x80\xBE" # resolution
-    readonly n="\xEF\x87\xAB" # network
-
-    # system information
-    case "$(uname -s)" in
-    Linux*)
-        readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
-        readonly kern="$(uname -r | cut -d '-' -f1)"
-        readonly shell=$(basename $SHELL)
-        readonly res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
-        readonly net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
-        [[ -z $net ]] && readonly net="no wifi"
-        ;;
-    Darwin*)
-        readonly wm="$(get_wm_mac)"
-        readonly kern="$(uname -r | cut -d '-' -f1)"
-        readonly shell="$(basename "$SHELL")"
-        readonly res="$(get_res_mac)"
-        readonly net="$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F' SSID: ' '/ SSID: / {print $2}')"
-        ;;
-    *)
-        echo "We do not support $1 yet."
-        echo "Sorry for the inconvenience."
-        exit 1
-        ;;
-    esac
-
-    tput clear # clear terminal screen
-}
-
 # set the eyes, ^.^ by default
 eyes() {
     case "$1" in
-    "0") echo ". ." ;;
-    "1") echo "· ·" ;;
-    "2") echo "^ ^" ;;
-    "3") echo "- -" ;;
-    "4") echo "~ ~" ;;
-    "5") echo "* *" ;;
-    "7") echo "-.-" ;;
-    "8") echo "~.~" ;;
-    "9") echo "*.*" ;;
-    "10") echo "0.0" ;;
-    "11") echo "0 0" ;;
-    "12") echo "o o" ;;
-    "13") echo "o.o" ;;
+    0) echo ". ." ;;
+    1) echo "· ·" ;;
+    2) echo "^ ^" ;;
+    3) echo "- -" ;;
+    4) echo "~ ~" ;;
+    5) echo "* *" ;;
+    7) echo "-.-" ;;
+    8) echo "~.~" ;;
+    9) echo "*.*" ;;
+    10) echo "0.0" ;;
+    11) echo "0 0" ;;
+    12) echo "o o" ;;
+    13) echo "o.o" ;;
     *) echo "^.^" ;;
     esac
 }
+
+# ------------------------- Fetch Functions ------------------------- #
 
 # sysinfo with cute kitty
 kittyfetch() {
@@ -182,6 +110,86 @@ simplefetch() {
     echo "  $c5$r$t  $res"
     echo "  $c4$n$t  $net"
 }
+
+# ------------------------- Info Collectors ------------------------- #
+
+# get the name of window manager (Mac OS)
+get_wm_mac() {
+    # From neofetch (https://github.com/dylanaraps/neofetch).
+    local -r ps_line="$(ps -e | grep -o \
+        -e "[S]pectacle" \
+        -e "[A]methyst" \
+        -e "[k]wm" \
+        -e "[c]hun[k]wm" \
+        -e "[y]abai" \
+        -e "[R]ectangle")"
+
+    case $ps_line in
+    *chunkwm*) echo chunkwm ;;
+    *kwm*) echo Kwm ;;
+    *yabai*) echo yabai ;;
+    *Amethyst*) echo Amethyst ;;
+    *Spectacle*) echo Spectacle ;;
+    *Rectangle*) echo Rectangle ;;
+    *) echo Quartz ;;
+    esac
+}
+
+# get the screen resolution (Mac OS)
+get_res_mac() {
+    # print resolution of multiple displays, separated by commas
+    echo "$(system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g')"
+
+    # print resolution of retina display
+    # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
+}
+
+# set necessary variable and clear the screen
+init() {
+    # store colour codes in variables
+    for i in {0..7}; do
+        printf -v "c${i}" '%b' "\e[3${i}m" # make following text have this colour
+    done
+
+    readonly d=$'\e[1m' # make following text bold
+    readonly t=$'\e[0m' # end previously applied effects (colours, bold, etc.)
+    readonly v=$'\e[7m' # swap text and background colours
+
+    # icons for the sysinfo
+    readonly w="\xEF\x82\x8A" # window manager
+    readonly k="\xEF\x82\xAD" # kernel
+    readonly s="\xEF\x84\xA0" # shell
+    readonly r="\xEF\x80\xBE" # resolution
+    readonly n="\xEF\x87\xAB" # network
+
+    # system information
+    case "$(uname -s)" in
+    Linux*)
+        readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
+        readonly kern="$(uname -r | cut -d '-' -f1)"
+        readonly shell=$(basename $SHELL)
+        readonly res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
+        readonly net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
+        [[ -z $net ]] && readonly net="no wifi"
+        ;;
+    Darwin*)
+        readonly wm="$(get_wm_mac)"
+        readonly kern="$(uname -r | cut -d '-' -f1)"
+        readonly shell="$(basename "$SHELL")"
+        readonly res="$(get_res_mac)"
+        readonly net="$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F' SSID: ' '/ SSID: / {print $2}')"
+        ;;
+    *)
+        echo "We do not support $1 yet."
+        echo "Sorry for the inconvenience."
+        exit 1
+        ;;
+    esac
+
+    tput clear # clear terminal screen
+}
+
+# --------------------------- Handle Args --------------------------- #
 
 # print the fetch info, kitty by default
 main() {
