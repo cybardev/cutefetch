@@ -113,37 +113,6 @@ simplefetch() {
 
 # ------------------------- Info Collectors ------------------------- #
 
-# get the name of window manager (Mac OS)
-get_wm_mac() {
-    # From neofetch (https://github.com/dylanaraps/neofetch).
-    local -r ps_line="$(ps -e | grep -o \
-        -e "[S]pectacle" \
-        -e "[A]methyst" \
-        -e "[k]wm" \
-        -e "[c]hun[k]wm" \
-        -e "[y]abai" \
-        -e "[R]ectangle")"
-
-    case $ps_line in
-    *chunkwm*) echo chunkwm ;;
-    *kwm*) echo Kwm ;;
-    *yabai*) echo yabai ;;
-    *Amethyst*) echo Amethyst ;;
-    *Spectacle*) echo Spectacle ;;
-    *Rectangle*) echo Rectangle ;;
-    *) echo Quartz ;;
-    esac
-}
-
-# get the screen resolution (Mac OS)
-get_res_mac() {
-    # print resolution of multiple displays, separated by commas
-    echo "$(system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g')"
-
-    # print resolution of retina display
-    # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
-}
-
 # set necessary variable and clear the screen
 init() {
     # store colour codes in variables
@@ -187,6 +156,37 @@ init() {
     esac
 
     tput clear # clear terminal screen
+}
+
+# get the name of window manager (Mac OS)
+get_wm_mac() {
+    # From neofetch (https://github.com/dylanaraps/neofetch).
+    local -r ps_line="$(ps -e | grep -o \
+        -e "[S]pectacle" \
+        -e "[A]methyst" \
+        -e "[k]wm" \
+        -e "[c]hun[k]wm" \
+        -e "[y]abai" \
+        -e "[R]ectangle")"
+
+    case $ps_line in
+    *chunkwm*) echo chunkwm ;;
+    *kwm*) echo Kwm ;;
+    *yabai*) echo yabai ;;
+    *Amethyst*) echo Amethyst ;;
+    *Spectacle*) echo Spectacle ;;
+    *Rectangle*) echo Rectangle ;;
+    *) echo Quartz ;;
+    esac
+}
+
+# get the screen resolution (Mac OS)
+get_res_mac() {
+    # print resolution of multiple displays, separated by commas
+    echo "$(system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g')"
+
+    # print resolution of retina display
+    # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
 }
 
 # --------------------------- Handle Args --------------------------- #
