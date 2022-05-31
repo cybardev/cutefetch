@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # ------------------------------------------------------------------- #
 readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
