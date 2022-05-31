@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # ------------------------------------------------------------------- #
 readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
@@ -125,11 +125,11 @@ init() {
     readonly v=$'\e[7m' # swap text and background colours
 
     # icons for the sysinfo
-    readonly w="\xEF\x82\x8A" # window manager
-    readonly k="\xEF\x82\xAD" # kernel
-    readonly s="\xEF\x84\xA0" # shell
-    readonly r="\xEF\x80\xBE" # resolution
-    readonly n="\xEF\x87\xAB" # network
+    readonly w="" # window manager
+    readonly k="" # kernel
+    readonly s="" # shell
+    readonly r="" # resolution
+    readonly n="" # network
 
     # system information
     case "$(uname -s)" in
