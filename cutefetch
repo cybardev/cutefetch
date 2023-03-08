@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # ------------------------------------------------------------------- #
 readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
@@ -125,11 +125,11 @@ init() {
     readonly v=$'\e[7m' # swap text and background colours
 
     # icons for the sysinfo
-    readonly w="\xEF\x82\x8A" # window manager
-    readonly k="\xEF\x82\xAD" # kernel
-    readonly s="\xEF\x84\xA0" # shell
-    readonly r="\xEF\x80\xBE" # resolution
-    readonly n="\xEF\x87\xAB" # network
+    readonly w="" # window manager
+    readonly k="" # kernel
+    readonly s="" # shell
+    readonly r="" # resolution
+    readonly n="" # network
 
     # system information
     case "$(uname -s)" in
@@ -137,13 +137,13 @@ init() {
         readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
         readonly kern="$(uname -r | cut -d '-' -f1)"
         readonly shell=$(basename $SHELL)
-        readonly res="$(xwininfo -root | grep geometry | awk '{print $2}' | cut -d + -f1)"
+        read -r _ res _ <<< xdpyinfo | grep 'dimemsions'
         readonly net="$(nmcli -g common | grep -m 1 connected | awk '{print($4)}')"
         [[ -z $net ]] && readonly net="no wifi"
         ;;
     Darwin*)
         readonly wm="$(get_wm_mac)"
-        readonly kern="$(uname -r | cut -d '-' -f1)"
+        readonly kern="$(uname) $(uname -r)"
         readonly shell="$(basename "$SHELL")"
         readonly res="$(get_res_mac)"
         readonly net="$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F' SSID: ' '/ SSID: / {print $2}')"
