@@ -183,7 +183,7 @@ get_wm_mac() {
 # get the screen resolution (Mac OS)
 get_res_mac() {
     # print resolution of multiple displays, separated by commas
-    echo "$(system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g')"
+    system_profiler SPDisplaysDataType | awk '/Resolution:/ {printf $2"x"$4"\n"}' | xargs | sed 's/ /, /g'
 
     # print resolution of retina display
     # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
