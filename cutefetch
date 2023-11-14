@@ -20,6 +20,7 @@ help_info() {
     echo "    [MODE]:"
     echo "        -h, --help: print this help message"
     echo "        -k, --kitty: show kitty ascii art with sysinfo"
+    echo "        -k2, --kitty2: show kitty ascii art with sysinfo"
     echo "        -b, --bunny: show bunny ascii art with sysinfo"
     echo "        -d, --doggy: show doggy ascii art with sysinfo"
     echo "        -p, --pingu: show penguin ascii art with sysinfo"
@@ -30,10 +31,10 @@ help_info() {
     echo "                       and return status code 1"
     echo ""
     echo "    [EYE_SELECTOR] (optional):"
-    echo "        Numbers from 0 to 13:"
+    echo "        Numbers from 0 to 14:"
     echo "            Selects eyes for kitty, bunny, and doggy"
     echo ""
-    for i in {0..13}; do
+    for i in {0..14}; do
         printf "        %2d:  %3s\n" "$i" "$(eyes $i)"
     done
     echo ""
@@ -60,6 +61,7 @@ eyes() {
     11) echo "0 0" ;;
     12) echo "o o" ;;
     13) echo "o.o" ;;
+    14) echo "° o" ;;
     *) echo "^.^" ;;
     esac
 }
@@ -73,6 +75,14 @@ kittyfetch() {
     echo "  ( $(eyes $1) )    $c2$s$t  $shell"
     echo "   $c1> $c3^ $c1<     $c5$r$t  $res"
     echo "             $c4$n$t  $net"
+}
+
+kittyfetch2() {
+    echo "   /'._           $c1$w$t  $wm"
+    echo "  ($(eyes $1) 7          $c3$k$t  $kern"
+    echo "   |'-'\"~.  .     $c2$s$t  $shell"
+    echo "   Uu^~C_J._.\"    $c5$r$t  $res"
+    echo "                  $c4$n$t  $net"
 }
 
 # sysinfo with cute bunny
@@ -205,6 +215,10 @@ main() {
         -k | --kitty | "")
             kittyfetch $2
             ;;
+        -k2 | --kitty2 | "")
+            kittyfetch2 $2
+            ;;
+
         -b | --bunny)
             [[ -z $2 ]] && eye="0" || eye="$2"
             bunnyfetch $eye
