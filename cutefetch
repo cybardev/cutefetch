@@ -136,7 +136,7 @@ init() {
     readonly v=$'\e[7m' # swap text and background colours
 
     # icons for the sysinfo
-    readonly w="" # window manager
+    readonly w="♥" # window manager
     readonly k="" # kernel
     readonly s="" # shell
     readonly r="" # resolution
