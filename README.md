@@ -13,6 +13,7 @@ Uses improvements from [strafe/bunnyfetch](https://github.com/strafe/bunnyfetch/
 
 -   Place the fetch script somewhere on your `$PATH` (I use `$HOME/.local/bin/`)
 -   Make it executable by running `chmod a+x ./cutefetch` in the directory it is located
+-   It is recommended to use a [NerdFont](https://www.nerdfonts.com/) as your terminal font if the glyphs are not being displayed properly.
 
 ### Usage
 
