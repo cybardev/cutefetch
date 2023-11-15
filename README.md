@@ -36,6 +36,7 @@ USAGE: cutefetch [MODE] [EYE_SELECTOR]
     [MODE]:
         -h, --help: print this help message
         -k, --kitty: show kitty ascii art with sysinfo
+        -k2, --kitty2: show kitty ascii art with sysinfo (2nd variant)
         -b, --bunny: show bunny ascii art with sysinfo
         -p, --puppy: show puppy ascii art with sysinfo
         -s, --simple: show sysinfo with no ascii art
@@ -45,7 +46,7 @@ USAGE: cutefetch [MODE] [EYE_SELECTOR]
                        and return status code 1
 
     [EYE_SELECTOR] (optional):
-        (numbers from 0 to 13)
+        (numbers from 0 to 14)
          0:  . .
          1:  · ·
          2:  ^ ^
@@ -60,6 +61,7 @@ USAGE: cutefetch [MODE] [EYE_SELECTOR]
         11:  0 0
         12:  o o
         13:  o.o
+        14:  ° o
         no/other number:
              ^.^ (kitty)
           or . . (bunny)
