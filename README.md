@@ -1,6 +1,6 @@
 # cutefetch
 
-## Cute little sysinfo fetch script for use in screenshots.
+## Tiny coloured fetch script with cute little animals
 
 > This script works on both Linux and Mac OS systems. Enjoy~ :3
 

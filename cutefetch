@@ -4,9 +4,10 @@ readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 #
 # Tiny coloured fetch script with cute little animals
 #
-# Authored by: elenapan (https://github.com/elenapan)
-# Modified by: strafe   (https://github.com/strafe)
-# Modified by: cybardev (https://github.com/cybardev)
+# Authored by: elenapan  (https://github.com/elenapan)
+# Modified by: strafe    (https://github.com/strafe)
+# Modified by: cybardev  (https://github.com/cybardev)
+# Modified by: Kalitsune (https://github.com/Kalitsune)
 # ------------------------------------------------------------------- #
 
 # ---------------------------- Utilities ---------------------------- #
@@ -18,14 +19,14 @@ help_info() {
     echo "USAGE: $(basename $0) [MODE] [EYE_SELECTOR]"
     echo ""
     echo "    [MODE]:"
-    echo "        -h, --help: print this help message"
-    echo "        -k, --kitty: show kitty ascii art with sysinfo"
+    echo "        -h,  --help: print this help message"
+    echo "        -k,  --kitty: show kitty ascii art with sysinfo"
     echo "        -k2, --kitty2: show kitty ascii art with sysinfo (2nd variant)"
-    echo "        -b, --bunny: show bunny ascii art with sysinfo"
-    echo "        -d, --doggy: show doggy ascii art with sysinfo"
-    echo "        -p, --pingu: show penguin ascii art with sysinfo"
-    echo "        -s, --simple: show sysinfo with no ascii art"
-    echo "        -v, --version: print the version number"
+    echo "        -b,  --bunny: show bunny ascii art with sysinfo"
+    echo "        -d,  --doggy: show doggy ascii art with sysinfo"
+    echo "        -p,  --pingu: show penguin ascii art with sysinfo"
+    echo "        -s,  --simple: show sysinfo with no ascii art"
+    echo "        -v,  --version: print the version number"
     echo "        no option: same as -k, --kitty"
     echo "        unkown option: print this help message"
     echo "                       and return status code 1"
