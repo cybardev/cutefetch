@@ -35,13 +35,13 @@ Cutefetch - Tiny coloured fetch script to display sysinfo
 USAGE: cutefetch [MODE] [EYE_SELECTOR]
 
     [MODE]:
-        -h, --help: print this help message
-        -k, --kitty: show kitty ascii art with sysinfo
+        -h,  --help: print this help message
+        -k,  --kitty: show kitty ascii art with sysinfo
         -k2, --kitty2: show kitty ascii art with sysinfo (2nd variant)
-        -b, --bunny: show bunny ascii art with sysinfo
-        -p, --puppy: show puppy ascii art with sysinfo
-        -s, --simple: show sysinfo with no ascii art
-        -v, --version: print the version number
+        -b,  --bunny: show bunny ascii art with sysinfo
+        -p,  --puppy: show puppy ascii art with sysinfo
+        -s,  --simple: show sysinfo with no ascii art
+        -v,  --version: print the version number
         no option: same as -k, --kitty
         unkown option: print this help message
                        and return status code 1
