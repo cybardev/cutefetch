@@ -217,7 +217,7 @@ main() {
         -k | --kitty | "")
             kittyfetch $2
             ;;
-        -k2 | --kitty2 | "")
+        -k2 | --kitty2)
             kittyfetch2 $2
             ;;
 
