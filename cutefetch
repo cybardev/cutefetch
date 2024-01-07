@@ -78,7 +78,7 @@ kittyfetch() {
     echo "             $c4$n$t  $net"
 }
 
-# sysinfo with cute kitty (2nd variant) 
+# sysinfo with cute kitty (2nd variant)
 kittyfetch2() {
     echo "   /'._           $c1$w$t  $wm"
     echo "  ($(eyes $1) 7          $c3$k$t  $kern"
@@ -220,7 +220,6 @@ main() {
         -k2 | --kitty2)
             kittyfetch2 $2
             ;;
-
         -b | --bunny)
             [[ -z $2 ]] && eye="0" || eye="$2"
             bunnyfetch $eye
