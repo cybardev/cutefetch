@@ -158,7 +158,7 @@ init() {
         readonly kern="$(uname) $(uname -r)"
         readonly shell="$(basename "$SHELL")"
         readonly res="$(get_res_mac)"
-        readonly net="$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F' SSID: ' '/ SSID: / {print $2}')"
+        readonly net="$(ipconfig getsummary en0 | grep "[^B]SSID" | cut -f2 -d ":" | xargs)"
         ;;
     *)
         echo "We do not support $1 yet."
