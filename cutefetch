@@ -175,12 +175,14 @@ init() {
 get_wm_mac() {
     # From neofetch (https://github.com/dylanaraps/neofetch).
     local -r ps_line="$(ps -e | grep -o \
-        -e "[S]pectacle" \
-        -e "[A]methyst" \
-        -e "[k]wm" \
-        -e "[c]hun[k]wm" \
+        -e "[A]ero[S]pace" \
         -e "[y]abai" \
-        -e "[R]ectangle")"
+        -e "[A]methyst" \
+        -e "[R]ectangle" \
+        -e "[c]hun[k]wm" \
+        -e "[k]wm" \
+        -e "[S]pectacle" \
+        | head -n 1)"
 
     case $ps_line in
     *chunkwm*) echo chunkwm ;;
