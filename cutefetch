@@ -182,16 +182,16 @@ get_wm_mac() {
         -e "[R]ectangle" \
         -e "[c]hun[k]wm" \
         -e "[k]wm" \
-        -e "[S]pectacle" \
-        | head -n 1)"
+        -e "[S]pectacle")"
 
     case $ps_line in
-    *chunkwm*) echo chunkwm ;;
-    *kwm*) echo Kwm ;;
+    *AeroSpace*) echo AeroSpace ;;
     *yabai*) echo yabai ;;
     *Amethyst*) echo Amethyst ;;
-    *Spectacle*) echo Spectacle ;;
     *Rectangle*) echo Rectangle ;;
+    *chunkwm*) echo chunkwm ;;
+    *kwm*) echo Kwm ;;
+    *Spectacle*) echo Spectacle ;;
     *) echo Quartz ;;
     esac
 }
