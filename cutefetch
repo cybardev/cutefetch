@@ -7,7 +7,8 @@ readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Questi
 # Authored by: elenapan  (https://github.com/elenapan)
 # Modified by: strafe    (https://github.com/strafe)
 # Modified by: cybardev  (https://github.com/cybardev)
-# Modified by: Kalitsune (https://github.com/Kalitsune)
+#
+# Other contributors: https://github.com/cybardev/cutefetch/graphs/contributors
 # ------------------------------------------------------------------- #
 
 # ---------------------------- Utilities ---------------------------- #
