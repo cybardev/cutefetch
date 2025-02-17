@@ -208,7 +208,7 @@ get_res_mac() {
 # --------------------------- Handle Args --------------------------- #
 
 # parse CLI arguments
-OPTSTRING=":e:s:hrv"
+OPTSTRING=":e:m:hrv"
 while getopts ${OPTSTRING} opt; do
   case ${opt} in
     v)
@@ -219,7 +219,7 @@ while getopts ${OPTSTRING} opt; do
         help_info
         exit 0
         ;;
-    s)
+    m)
         MODE_CHOICE="${OPTARG}"
         ;;
     e)
