@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------- #
-readonly VERSION_INFO="Cutefetch v2.0 - To Cat or Not to Cat; That Is The Question."
 #
 # Tiny coloured fetch script with cute little animals
 #
 # Authored by: elenapan  (https://github.com/elenapan)
 # Modified by: strafe    (https://github.com/strafe)
 # Modified by: cybardev  (https://github.com/cybardev)
-# Modified by: Kalitsune (https://github.com/Kalitsune)
+# And others: https://github.com/cybardev/cutefetch/graphs/contributors
 # ------------------------------------------------------------------- #
+
+readonly VERSION_INFO="v3.0.0"
 
 # ---------------------------- Utilities ---------------------------- #
 
@@ -203,45 +204,65 @@ get_res_mac() {
 
 # --------------------------- Handle Args --------------------------- #
 
+# parse CLI arguments
+OPTSTRING=":e:s:hv"
+while getopts ${OPTSTRING} opt; do
+  case ${opt} in
+    v)
+        echo "${VERSION_INFO}"
+        exit 0
+        ;;
+    h)
+        help_info
+        exit 0
+        ;;
+    s)
+        MODE_CHOICE="${OPTARG}"
+        ;;
+    e)
+        EYES_CHOICE="${OPTARG}"
+        ;;
+    :)
+        echo "Option -${OPTARG} requires an argument."
+        echo ""
+        help_info
+        exit 1
+        ;;
+    ?)
+        help_info
+        exit 1
+        ;;
+  esac
+done
+
 # print the fetch info, kitty by default
 main() {
-    # -v, --version and -h, --help do not clear the screen
-    if [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]; then
-        echo $VERSION_INFO
-    elif [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]; then
-        help_info
-    else
-        init
-        echo ""
-        case "$1" in
-        -k | --kitty | "")
-            kittyfetch $2
-            ;;
-        -k2 | --kitty2)
-            kittyfetch2 $2
-            ;;
-        -b | --bunny)
-            [[ -z $2 ]] && eye="0" || eye="$2"
-            bunnyfetch $eye
-            ;;
-        -d | --doggy)
-            [[ -z $2 ]] && eye="1" || eye="$2"
-            puppyfetch $eye
-            ;;
-        -p | --pingu)
-            pingufetch
-            ;;
-        -s | --simple)
-            simplefetch
-            ;;
-        *)
-            help_info
-            exit 1
-            ;;
-        esac
-        echo ""
-    fi
+    init
+    echo ""
+    case "$1" in
+    cat | kitty | "")
+        kittyfetch $2
+        ;;
+    catfull | cat2 | kitty2)
+        kittyfetch2 $2
+        ;;
+    bunny)
+        [[ -z $2 ]] && eye="0" || eye="$2"
+        bunnyfetch $eye
+        ;;
+    dog | doggy)
+        [[ -z $2 ]] && eye="1" || eye="$2"
+        puppyfetch $eye
+        ;;
+    penguin | pingu)
+        pingufetch
+        ;;
+    none | simple)
+        simplefetch
+        ;;
+    esac
+    echo ""
 }
 
 # call the main function
-main $1 $2
+main "${MODE_CHOICE}" "${EYES_CHOICE}"
