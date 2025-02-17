@@ -151,15 +151,16 @@ init() {
         readonly kern="$(uname -r | cut -f1 -d '-')"
         readonly shell=$(basename $SHELL)
         readonly res="$(xdpyinfo | grep 'dimensions' | grep -oE '[0-9]+x[0-9]+' | head -n 1)"
-        readonly net="$(nmcli -g common | grep -m 1 connected | cut -f4- -d ' ')"
-        [[ -z $net ]] && readonly net="no wifi"
+        net="$(nmcli -g common | grep -m 1 connected | cut -f4- -d ' ')"
+        [[ -z $net ]] && readonly net="no wifi" || readonly net="$net"
         ;;
     Darwin*)
         readonly wm="$(get_wm_mac)"
         readonly kern="$(uname) $(uname -r)"
         readonly shell="$(basename "$SHELL")"
         readonly res="$(get_res_mac)"
-        readonly net="$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I | awk -F' SSID: ' '/ SSID: / {print $2}')"
+        net="$(ipconfig getsummary en0 | grep "[^B]SSID")"
+        [[ -z $net ]] && readonly net="no wifi" || readonly net="${net:9}"
         ;;
     *)
         echo "We do not support $1 yet."
@@ -175,20 +176,22 @@ init() {
 get_wm_mac() {
     # From neofetch (https://github.com/dylanaraps/neofetch).
     local -r ps_line="$(ps -e | grep -o \
-        -e "[S]pectacle" \
-        -e "[A]methyst" \
-        -e "[k]wm" \
-        -e "[c]hun[k]wm" \
+        -e "[A]ero[S]pace" \
         -e "[y]abai" \
-        -e "[R]ectangle")"
+        -e "[A]methyst" \
+        -e "[R]ectangle" \
+        -e "[c]hun[k]wm" \
+        -e "[k]wm" \
+        -e "[S]pectacle")"
 
     case $ps_line in
-    *chunkwm*) echo chunkwm ;;
-    *kwm*) echo Kwm ;;
+    *AeroSpace*) echo AeroSpace ;;
     *yabai*) echo yabai ;;
     *Amethyst*) echo Amethyst ;;
-    *Spectacle*) echo Spectacle ;;
     *Rectangle*) echo Rectangle ;;
+    *chunkwm*) echo chunkwm ;;
+    *kwm*) echo Kwm ;;
+    *Spectacle*) echo Spectacle ;;
     *) echo Quartz ;;
     esac
 }
