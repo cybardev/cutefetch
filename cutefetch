@@ -273,7 +273,7 @@ main() {
     catfull | cat2 | kitty2)
         kittyfetch2 $2
         ;;
-    bunny)
+    bunny | rabbit)
         [[ -z $2 ]] && eye="0" || eye="$2"
         bunnyfetch $eye
         ;;
