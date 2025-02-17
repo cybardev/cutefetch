@@ -208,7 +208,7 @@ get_res_mac() {
 # --------------------------- Handle Args --------------------------- #
 
 # parse CLI arguments
-OPTSTRING=":e:s:hv"
+OPTSTRING=":e:s:hrv"
 while getopts ${OPTSTRING} opt; do
   case ${opt} in
     v)
@@ -225,6 +225,9 @@ while getopts ${OPTSTRING} opt; do
     e)
         EYES_CHOICE="${OPTARG}"
         ;;
+    r)
+        RAND_CHOICE=true
+        ;;
     :)
         echo "Option -${OPTARG} requires an argument."
         echo ""
@@ -237,6 +240,27 @@ while getopts ${OPTSTRING} opt; do
         ;;
   esac
 done
+
+# randomization
+if [[ "${RAND_CHOICE}" = true ]]; then
+    if [[ -z "${EYES_CHOICE}" ]]; then
+        EYES_LIST="$(seq -s "," 0 15)"
+        EYES_LIST="${EYES_LIST::-1}"
+    else
+        EYES_LIST="${EYES_CHOICE}"
+    fi
+    if [[ -z "${MODE_CHOICE}" ]]; then
+        MODE_LIST="cat catfull bunny dog penguin none"
+    else
+        MODE_LIST="${MODE_CHOICE}"
+    fi
+
+    EYES_LIST="${EYES_LIST//,/ }"
+    MODE_LIST="${MODE_LIST//,/ }"
+
+    EYES_CHOICE="$(shuf -e -n 1 ${EYES_LIST})"
+    MODE_CHOICE="$(shuf -e -n 1 ${MODE_LIST})"
+fi
 
 # print the fetch info, kitty by default
 main() {
