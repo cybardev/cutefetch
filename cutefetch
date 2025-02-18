@@ -25,7 +25,8 @@ help_info() {
     echo "        bunny, rabbit         : show bunny ascii art with sysinfo"
     echo "        dog, doggo, doggy     : show doggy ascii art with sysinfo"
     echo "        penguin, pengu, pingu : show penguin ascii art with sysinfo"
-    echo "        none, minimal, simple : show sysinfo with no ascii art"
+    echo "        minimal, simple       : show sysinfo with no ascii art"
+    echo "        none, noglyph, text   : show sysinfo with text only"
     echo ""
     echo "    [EYES]:"
     echo "        Numbers from 0 to 15:"
@@ -124,6 +125,15 @@ simplefetch() {
     echo "  $c2$s$t  $shell"
     echo "  $c5$r$t  $res"
     echo "  $c4$n$t  $net"
+}
+
+# sysinfo with text only
+textfetch() {
+    echo " $c1 wm $t : $wm"
+    echo " $c3 krn$t : $kern"
+    echo " $c2 sh $t : $shell"
+    echo " $c5 res$t : $res"
+    echo " $c4 net$t : $net"
 }
 
 # ------------------------- Info Collectors ------------------------- #
@@ -289,8 +299,11 @@ main() {
     penguin | pengu | pingu)
         pingufetch
         ;;
-    none | minimal | simple)
+    minimal | simple)
         simplefetch
+        ;;
+    none | noglyph | text)
+        textfetch
         ;;
     esac
     echo ""
