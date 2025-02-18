@@ -242,7 +242,10 @@ while getopts ${OPTSTRING} opt; do
 done
 
 # randomization
-if [[ "${RAND_CHOICE}" = true ]]; then
+if [[ "${RAND_CHOICE}" = true ]] ||
+    [[ "${MODE_CHOICE}" =~ [,] ]] ||
+    [[ "${EYES_CHOICE}" =~ [,] ]]
+then
     if [[ -z "${EYES_CHOICE}" ]]; then
         EYES_LIST="$(seq -s "," 0 15)"
         EYES_LIST="${EYES_LIST::-1}"
