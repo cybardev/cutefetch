@@ -129,11 +129,11 @@ simplefetch() {
 
 # sysinfo with text only
 textfetch() {
-    echo " $c1 wm $t : $wm"
-    echo " $c3 krn$t : $kern"
-    echo " $c2 sh $t : $shell"
-    echo " $c5 res$t : $res"
-    echo " $c4 net$t : $net"
+    echo "$c1 wm $t : $wm"
+    echo "$c3 krn$t : $kern"
+    echo "$c2 sh $t : $shell"
+    echo "$c5 res$t : $res"
+    echo "$c4 net$t : $net"
 }
 
 # ------------------------- Info Collectors ------------------------- #
