@@ -280,14 +280,14 @@ main() {
         [[ -z $2 ]] && eye="0" || eye="$2"
         bunnyfetch $eye
         ;;
-    dog | doggy)
+    dog | doggo | doggy)
         [[ -z $2 ]] && eye="1" || eye="$2"
         puppyfetch $eye
         ;;
-    penguin | pingu)
+    penguin | pengu | pingu)
         pingufetch
         ;;
-    none | simple)
+    none | minimal | simple)
         simplefetch
         ;;
     esac
