@@ -265,7 +265,7 @@ then
         EYES_LIST="${EYES_CHOICE}"
     fi
     if [[ -z "${MODE_CHOICE}" ]]; then
-        MODE_LIST="cat catfull bunny dog penguin simple text"
+        MODE_LIST="cat catfull bunny dog penguin"
     else
         MODE_LIST="${MODE_CHOICE}"
     fi
