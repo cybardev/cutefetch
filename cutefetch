@@ -9,7 +9,7 @@
 # And others: https://github.com/cybardev/cutefetch/graphs/contributors
 # ------------------------------------------------------------------- #
 
-readonly VERSION_INFO="v3.0.1"
+readonly VERSION_INFO="v3.1.0"
 
 # ---------------------------- Utilities ---------------------------- #
 
@@ -79,7 +79,7 @@ kittyfetch() {
     echo "   /\_/\     $c3$k$t  $kern"
     echo "  ( $(eyes $1) )    $c2$s$t  $shell"
     echo "   $c1> $c3^ $c1<     $c5$r$t  $res"
-    echo "             $c4$n$t  $net"
+    echo "             $c4$n$t  $up"
 }
 
 # sysinfo with cute kitty (2nd variant)
@@ -88,7 +88,7 @@ kittyfetch2() {
     echo "  ($(eyes $1) 7          $c3$k$t  $kern"
     echo "   |'-'\"~.  .     $c2$s$t  $shell"
     echo "   Uu^~C_J._.\"    $c5$r$t  $res"
-    echo "                  $c4$n$t  $net"
+    echo "                  $c4$n$t  $up"
 }
 
 # sysinfo with cute bunny
@@ -97,7 +97,7 @@ bunnyfetch() {
     echo "   (\ /)     $c3$k$t  $kern"
     echo "   ( $(eyes $1))    $c2$s$t  $shell"
     echo "   c($c1\"$t)($c1\"$t)   $c5$r$t  $res"
-    echo "             $c4$n$t  $net"
+    echo "             $c4$n$t  $up"
 }
 
 # sysinfo with cute puppy
@@ -106,7 +106,7 @@ puppyfetch() {
     echo "$c3   /^ ^\    $k$t  $kern"
     echo "$c3  /$t$c7 $(eyes $1) $c3\   $c2$s$t  $shell"
     echo "$c3  V\\$t$c0 Y $c3/V   $c5$r$t  $res"
-    echo "    $c1 U$t      $c4$n$t  $net"
+    echo "    $c1 U$t      $c4$n$t  $up"
 }
 
 # sysinfo with cute penguin
@@ -115,7 +115,7 @@ pingufetch() {
     echo "$c0   ($t$c7'$c3>    $k$t  $kern"
     echo "$c0  /$t$c7/‾\\$c0\\   $c2$s$t  $shell"
     echo "$c0  ($t$c7\_/$c0)   $c5$r$t  $res"
-    echo "$c3   ~ ~    $c4$n$t  $net"
+    echo "$c3   ~ ~    $c4$n$t  $up"
 }
 
 # sysinfo with cute icons
@@ -124,7 +124,7 @@ simplefetch() {
     echo "  $c3$k$t  $kern"
     echo "  $c2$s$t  $shell"
     echo "  $c5$r$t  $res"
-    echo "  $c4$n$t  $net"
+    echo "  $c4$n$t  $up"
 }
 
 # sysinfo with text only
@@ -133,7 +133,7 @@ textfetch() {
     echo "$c3 krn$t : $kern"
     echo "$c2 sh $t : $shell"
     echo "$c5 res$t : $res"
-    echo "$c4 net$t : $net"
+    echo "$c4 up $t : $up"
 }
 
 # ------------------------- Info Collectors ------------------------- #
@@ -150,11 +150,11 @@ init() {
     readonly v=$'\e[7m' # swap text and background colours
 
     # icons for the sysinfo
-    readonly w="♥" # window manager
+    readonly w="" # window manager
     readonly k="" # kernel
     readonly s="" # shell
     readonly r="" # resolution
-    readonly n="" # network
+    readonly n="" # uptime
 
     # system information
     case "$(uname -s)" in
@@ -163,16 +163,14 @@ init() {
         readonly kern="$(uname -r | cut -f1 -d '-')"
         readonly shell=$(basename $SHELL)
         readonly res="$(xdpyinfo | grep 'dimensions' | grep -oE '[0-9]+x[0-9]+' | head -n 1)"
-        net="$(nmcli -g common | grep -m 1 connected | cut -f4- -d ' ')"
-        [[ -z $net ]] && readonly net="no wifi" || readonly net="$net"
+        readonly up="$(uptime | xargs | cut -d ' ' -f 1)"
         ;;
     Darwin*)
         readonly wm="$(get_wm_mac)"
         readonly kern="$(uname) $(uname -r)"
         readonly shell="$(basename "$SHELL")"
         readonly res="$(get_res_mac)"
-        net="$(ipconfig getsummary en0 | grep "[^B]SSID")"
-        [[ -z $net ]] && readonly net="no wifi" || readonly net="${net:9}"
+        readonly up="$(uptime | xargs | cut -d ' ' -f 1)"
         ;;
     *)
         echo "We do not support $1 yet."

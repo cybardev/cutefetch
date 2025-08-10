@@ -2,7 +2,7 @@
   description = "cybardev/cutefetch";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
   };
 
   outputs = {nixpkgs, ...}: let
