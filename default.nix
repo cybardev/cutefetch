@@ -4,7 +4,7 @@
 }: let
   author = "cybardev";
   pname = "cutefetch";
-  version = "3.1.0";
+  version = "3.1.1";
 in
   pkgs.stdenvNoCC.mkDerivation {
     inherit pname;
