@@ -9,7 +9,7 @@
 # And others: https://github.com/cybardev/cutefetch/graphs/contributors
 # ------------------------------------------------------------------- #
 
-readonly VERSION_INFO="v3.1.2"
+readonly VERSION_INFO="v3.2.0"
 
 # ---------------------------- Utilities ---------------------------- #
 
@@ -191,26 +191,22 @@ get_uptime() {
 
 # get the name of window manager (Mac OS)
 get_wm_mac() {
-    # From neofetch (https://github.com/dylanaraps/neofetch).
-    local -r ps_line="$(ps -e | grep -o \
-        -e "[A]ero[S]pace" \
-        -e "[y]abai" \
-        -e "[A]methyst" \
-        -e "[R]ectangle" \
-        -e "[c]hun[k]wm" \
-        -e "[k]wm" \
-        -e "[S]pectacle")"
+    local pid name
+    read -r pid name <<< "$(pgrep -x -l "AeroSpace|rift|yabai|Amethyst|Rectangle|chunkwm|kwm|Spectacle" 2>/dev/null | head -1)"
 
-    case $ps_line in
-    *AeroSpace*) echo AeroSpace ;;
-    *yabai*) echo yabai ;;
-    *Amethyst*) echo Amethyst ;;
-    *Rectangle*) echo Rectangle ;;
-    *chunkwm*) echo chunkwm ;;
-    *kwm*) echo Kwm ;;
-    *Spectacle*) echo Spectacle ;;
+    shopt -s nocasematch
+    case $name in
+    aerospace) echo AeroSpace ;;
+    rift) echo rift ;;
+    yabai) echo yabai ;;
+    amethyst) echo Amethyst ;;
+    rectangle) echo Rectangle ;;
+    chunkwm) echo chunkwm ;;
+    kwm) echo Kwm ;;
+    spectacle) echo Spectacle ;;
     *) echo Quartz ;;
     esac
+    shopt -u nocasematch
 }
 
 # get the screen resolution (Mac OS)
