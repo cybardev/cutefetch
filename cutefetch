@@ -196,7 +196,7 @@ get_wm_linux() {
     # Removes suffixes from the environment variable (Hyprland:wlroots -> Hyprland)
     desktop="${desktop%%:*}"
 
-    if [ -n "$desktop" ]; then
+    if [[ "$XDG_SESSION_TYPE" = "wayland" && -n "$desktop" ]]; then
         echo "$desktop"
     else
         xprop -id "$(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \"
