@@ -159,10 +159,10 @@ init() {
     # system information
     case "$(uname -s)" in
     Linux*)
-        readonly wm="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \")"
+        readonly wm="$(get_wm_linux)"
         readonly kern="$(uname -r | cut -f1 -d '-')"
         readonly shell=$(basename $SHELL)
-        readonly res="$(xdpyinfo | grep 'dimensions' | grep -oE '[0-9]+x[0-9]+' | head -n 1)"
+        readonly res="$(get_res_linux)"
         readonly up="$(get_uptime)"
         ;;
     Darwin*)
@@ -189,7 +189,21 @@ get_uptime() {
     echo $up | xargs  # trim whitespace
 }
 
-# get the name of window manager (Mac OS)
+# get the name of the window manager (Linux)
+get_wm_linux() {
+    desktop="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-$DESKTOP_SESSION}}"
+
+    # Removes suffixes from the environment variable (Hyprland:wlroots -> Hyprland)
+    desktop="${desktop%%:*}"
+
+    if [ -n "$desktop" ]; then
+        echo "$desktop"
+    else
+        xprop -id "$(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" -notype -f _NET_WM_NAME 8t | grep -m 1 "WM_NAME" | cut -f2 -d \"
+    fi
+}
+
+# get the name of the window manager (Mac OS)
 get_wm_mac() {
     local pid name
     read -r pid name <<< "$(pgrep -x -l "AeroSpace|rift|yabai|Amethyst|Rectangle|chunkwm|kwm|Spectacle" 2>/dev/null | head -1)"
@@ -216,6 +230,18 @@ get_res_mac() {
 
     # print resolution of retina display
     # echo "$(system_profiler SPDisplaysDataType | grep Retina | awk '/Resolution:/ {printf $2"x"$4"\n"}')"
+}
+
+# get the screen resolution (Linux)
+get_res_linux() {
+    if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+        wayland-info 2>/dev/null | awk '
+          /width:.*height:.*px/ { w=$2; h=$5 }
+          /flags:.*current/     { print w "x" h; exit }
+        '
+    else
+        xdpyinfo | grep 'dimensions' | grep -oE '[0-9]+x[0-9]+' | head -n 1
+    fi
 }
 
 # --------------------------- Handle Args --------------------------- #

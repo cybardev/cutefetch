@@ -1,6 +1,15 @@
-{pkgs ? import <nixpkgs> {}}:
+{
+  pkgs ? import <nixpkgs> { },
+}:
+
 pkgs.mkShellNoCC {
   packages = with pkgs; [
-    (callPackage ./. {})
+    (callPackage ./. { })
+
+    # Dev deps
+    networkmanager
+    xprop
+    xdpyinfo
+    wayland-utils
   ];
 }
