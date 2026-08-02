@@ -9,7 +9,7 @@
 # And others: https://github.com/cybardev/cutefetch/graphs/contributors
 # ------------------------------------------------------------------- #
 
-readonly VERSION_INFO="v3.2.0"
+readonly VERSION_INFO="v3.3.0"
 
 # ---------------------------- Utilities ---------------------------- #
 
